@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // add some values from the server
-$_POST['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
+$_POST['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
 $_POST['REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];
 
 // escape special chars
