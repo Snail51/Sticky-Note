@@ -27,14 +27,22 @@
         <meta name="twitter:description" content="Write something down for later">
         <meta name="twitter:image" content="./icon.png">
 
+        <style>
+            .mobileSize * {
+                height: 10vh;
+                min-width: 45vw;
+                font-size: 5vmin;
+            }
+        </style>
+
     </head>
-    <body>
+    <body style="background-color: #2c2e36; color: #f5f5f5;">
         <h1>Sticky Note</h1>
         <i>Write down info for later.</i><br>
         <i>If you are someone other than the creator of this app, <b>you shouldn't be using this!</b></i>
         <hr>
 
-        <form action="./writer.php" method="POST">
+        <form action="./writer.php" method="POST" class="mobileSize">
 
             <label for="type">Record Type:</label>
             <select id="type" name="TYPE">
@@ -45,26 +53,32 @@
             </select>
             <br><br>
 
+            <label for="tags">Type Tags:</label>
+            <input type="text" id="tags" name="TAGS">
+            <br>
+
+            <br>
+
             <label for="payload1">Data 1:</label>
-            <input type="text" id="payload1" name="PAYLOAD1" style="width: 80vw; height: 40vh">
+            <textarea id="payload1" name="PAYLOAD1"></textarea>
             <br>
             <label for="payload2">Data 2:</label>
-            <input type="text" id="payload2" name="PAYLOAD2" style="width: 80vw; height: 10vh">
+            <textarea id="payload2" name="PAYLOAD2"></textarea>
             <br>
-            <label for="payload1">Data 3:</label>
-            <input type="text" id="payload3" name="PAYLOAD3" style="width: 80vw; height: 10vh">
+            <label for="payload3">Data 3:</label>
+            <textarea id="payload3" name="PAYLOAD3"></textarea>
             <br>
-            <label for="payload1">Data 4:</label>
-            <input type="text" id="payload4" name="PAYLOAD4" style="width: 80vw; height: 10vh">
+            <label for="payload4">Data 4:</label>
+            <textarea id="payload4" name="PAYLOAD4"></textarea>
             <br>
             <label for="payload5">Data 5:</label>
-            <input type="text" id="payload5" name="PAYLOAD5" style="width: 80vw; height: 10vh">
+            <textarea id="payload5" name="PAYLOAD5"></textarea>
             <br>
-            
+    
             <br>
 
             <label for="strength">Priority / Importance:</label>
-            <select id="strength" name="STRENGTH">
+            <select id="strength" name="IMPORTANCE">
                 <option value="-1">Please select...</option>
                 <option value="0">None</option>
                 <option value="1">Low</option>
@@ -74,14 +88,14 @@
             <br><br>
 
             <label for="ephemeral">Ephemeral:</label>
-            <select id="ephemeral" name="EPHEMERAL">
+            <select id="ephemeral" name="DELETABLE">
                 <option value=false>This data should persist</option>
                 <option value=true>This data is only useful short-term</option>
             </select>
             <br><br>
 
             <label for="time">Current Timestamp:</label>
-            <input type="datetime-local" id="time" name="TIMESTAMP_SELECTED">
+            <input type="datetime-local" id="time" name="SELECTED_TIME">
             <br><br>
 
             <label for="position_latitude">Current Latitude:</label>
