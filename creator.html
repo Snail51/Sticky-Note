@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Create New Link</title>
+        <link rel="icon" href="./link.svg" type="image/x-icon">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <title>Create New Link</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Create shortened links with this stateless link shortener">
+        <meta name="keywords" content="tool,link,link shortener,free,stateless,safe">
+
+        <meta property="og:title" content="Create New Link">
+        <meta property="og:description" content="Create shortened links with this stateless link shortener">
+        <meta property="og:site_name" content="Snailien Stateless Link Shortener">
+        <meta property="og:url" content="snailien.ddns.net">
+        <meta property="og:image" content="./link.svg">
+
+        <meta itemprop="name" content="Create New Link">
+        <meta itemprop="description" content="Create shortened links with this stateless link shortener">
+        <meta itemprop="image" content="./link.svg">
+
+        <meta name="twitter:card" content="Create shortened links with this stateless link shortener">
+        <meta name="twitter:url" content="snailien.ddns.net">
+        <meta name="twitter:title" content="Create New Link">
+        <meta name="twitter:description" content="Create shortened links with this stateless link shortener">
+        <meta name="twitter:image" content="./link.svg">
+
+        <!-- Ensure compression libraries are available at global scope -->
+        <script src="./lib/lzma-min.js"></script>
+        <script src="./lib/pako-min.js"></script>
+    </head>
+    <body>
+        <div style="display: flex; flex-direction: column;">
+            <h1>Snailien Stateless Link Shortener</h1>
+            <i>Put your target (long) link in the input and copy the output link.</i>
+            <hr>
+
+            <label for="input">Input Link:</label>
+            <div>
+                <input type="text" id="input" style="width:65vw">
+                <input type="text" id="inputLength" readonly style="width:20vw">
+                <button id="copyInput" onclick="navigator.clipboard.writeText(document.getElementById('input').value)" style="width:10vw">Copy</button>
+            </div>
+            
+            
+            <label for="output">Output Link:</label>
+            <div>
+                <input type="text" id="output" readonly style="width:65vw">
+                <input type="text" id="outputLength" readonly style="width:20vw">
+                <button id="copyOutput" onclick="navigator.clipboard.writeText(document.getElementById('output').value)" style="width:10vw">Copy</button>
+            </div>
+            
+        </div>
+
+        <script>
+
+        </script>
+        
+
+        
+
+        <script type="module">
+            window.redirectBaseURL = "https://tools.snailien.net/LinkShortener/unpack.php";
+
+            import { Compressor } from "./compressor.js";
+            var c = new Compressor();
+            window.main = c;
+
+            document.getElementById('input').addEventListener('input', function() 
+            {
+                document.getElementById('output').value = window.redirectBaseURL + window.main.push(document.getElementById('input').value);
+                document.getElementById('inputLength').value = document.getElementById('input').value.length;
+                document.getElementById('outputLength').value = document.getElementById('output').value.length;
+            });
+        </script>
+    </body>
+</html>
