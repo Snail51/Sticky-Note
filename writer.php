@@ -7,6 +7,14 @@ error_reporting(E_ALL);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    // abort on malicious input
+    $check = strlen(print_r($_POST, true));
+    if( $check > 8192 )
+    {
+        echo "Data too long (" . $check . "). Aborting.";
+        exit;
+    }
+
     // add some values from the server
     $_POST['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
     $_POST['REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];
@@ -22,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     file_put_contents("./record.csv", $out, FILE_APPEND);
 
 
-    echo "Wrote the following to the record:<br>" . "<pre>" . $out . "</pre>";
+    echo "Wrote " . $check . " characters following to the record:<br>" . "<pre>" . $out . "</pre>";
     exit;
 }
 
