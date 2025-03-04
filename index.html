@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Create New Link</title>
+        <link rel="icon" href="./link.svg" type="image/x-icon">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <title>Create New Link</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Create shortened links with this stateless link shortener">
+        <meta name="keywords" content="tool,link,link shortener,free,stateless,safe">
+
+        <meta property="og:title" content="Create New Link">
+        <meta property="og:description" content="Create shortened links with this stateless link shortener">
+        <meta property="og:site_name" content="Snailien Stateless Link Shortener">
+        <meta property="og:url" content="snailien.ddns.net">
+        <meta property="og:image" content="./link.svg">
+
+        <meta itemprop="name" content="Create New Link">
+        <meta itemprop="description" content="Create shortened links with this stateless link shortener">
+        <meta itemprop="image" content="./link.svg">
+
+        <meta name="twitter:card" content="Create shortened links with this stateless link shortener">
+        <meta name="twitter:url" content="snailien.ddns.net">
+        <meta name="twitter:title" content="Create New Link">
+        <meta name="twitter:description" content="Create shortened links with this stateless link shortener">
+        <meta name="twitter:image" content="./link.svg">
+
+    </head>
+    <body>
+        <h1>Sticky Note</h1>
+        <i>Write down info for later.</i><br>
+        <i>If you are someone other than the creator of this app, <b>you shouldn't be using this!</b></i>
+        <hr>
+
+        <form action="./writer.php" method="POST">
+
+            <label for="type">Record Type:</label>
+            <select id="type" name="TYPE">
+                <option value="unset">Please select...</option>
+                <option value="note_other">Misc Note</option>
+                <option value="data_other">Misc Data</option>
+                <option value="data_bm">Necessary Evil</option>
+            </select>
+            <br><br>
+
+            <label for="payload1">Data 1:</label>
+            <input type="text" id="payload1" name="PAYLOAD1" style="width: 80vw; height: 40vh">
+            <br>
+            <label for="payload2">Data 2:</label>
+            <input type="text" id="payload2" name="PAYLOAD2" style="width: 80vw; height: 10vh">
+            <br>
+            <label for="payload1">Data 3:</label>
+            <input type="text" id="payload3" name="PAYLOAD3" style="width: 80vw; height: 10vh">
+            <br>
+            <label for="payload1">Data 4:</label>
+            <input type="text" id="payload4" name="PAYLOAD4" style="width: 80vw; height: 10vh">
+            <br>
+            <label for="payload5">Data 5:</label>
+            <input type="text" id="payload5" name="PAYLOAD5" style="width: 80vw; height: 10vh">
+            <br>
+            
+            <br>
+
+            <label for="strength">Priority / Importance:</label>
+            <select id="strength" name="STRENGTH">
+                <option value="-1">Please select...</option>
+                <option value="0">None</option>
+                <option value="1">Low</option>
+                <option value="2">Medium</option>
+                <option value="3">High</option>
+            </select>
+            <br><br>
+
+            <label for="ephemeral">Ephemeral:</label>
+            <select id="ephemeral" name="EPHEMERAL">
+                <option value=false>This data should persist</option>
+                <option value=true>This data is only useful short-term</option>
+            </select>
+            <br><br>
+
+            <label for="time">Current Timestamp:</label>
+            <input type="datetime-local" id="time" name="TIMESTAMP_SELECTED">
+            <br><br>
+
+            <label for="position_latitude">Current Latitude:</label>
+            <input type="text" id="position_latitude" name="POSITION_LATITUDE" readonly>
+            <br><br>
+            <label for="position_longitude">Current Longitude:</label>
+            <input type="text" id="position_longitude" name="POSITION_LONGITUDE" readonly>
+            <br><br>
+            
+
+            <button type="submit">Submit</button>
+        </form>
+            
+
+
+        <script>
+            function getLocation() {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            document.getElementById("position_latitude").value = position.coords.latitude;
+                            document.getElementById("position_longitude").value = position.coords.longitude;
+                        },
+                        error => {
+                            console.error("Error getting location:", error)
+                            document.getElementById("position_latitude").value = "ERROR";
+                            document.getElementById("position_longitude").value = "ERROR";
+                        }
+                    );
+                }
+            }
+            getLocation();
+
+            function getTimestamp() // get the current DateTime (in local timezone) and write it to the time <input>
+            {
+                var offset = new Date().getTimezoneOffset()*60*1000; // value given is in minutes, convert to milliseconds
+                var ts = new Date(Date.now() - offset);
+                var ts = ts.toISOString();
+                console.log(ts);
+                ts = ts.substring(0, ts.length - 8);
+                document.getElementById("time").value = ts;
+            }
+            getTimestamp();
+        </script>
+        
+
+        
+
+        <script type="module">
+            window.redirectBaseURL = "https://tools.snailien.net/LinkShortener/unpack.php";
+
+            import { Compressor } from "./compressor.js";
+            var c = new Compressor();
+            window.main = c;
+
+            document.getElementById('input').addEventListener('input', function() 
+            {
+                document.getElementById('output').value = window.redirectBaseURL + window.main.push(document.getElementById('input').value);
+                document.getElementById('inputLength').value = document.getElementById('input').value.length;
+                document.getElementById('outputLength').value = document.getElementById('output').value.length;
+            });
+        </script>
+    </body>
+</html>
