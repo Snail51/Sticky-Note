@@ -140,23 +140,5 @@
             }
             getTimestamp();
         </script>
-        
-
-        
-
-        <script type="module">
-            window.redirectBaseURL = "https://tools.snailien.net/LinkShortener/unpack.php";
-
-            import { Compressor } from "./compressor.js";
-            var c = new Compressor();
-            window.main = c;
-
-            document.getElementById('input').addEventListener('input', function() 
-            {
-                document.getElementById('output').value = window.redirectBaseURL + window.main.push(document.getElementById('input').value);
-                document.getElementById('inputLength').value = document.getElementById('input').value.length;
-                document.getElementById('outputLength').value = document.getElementById('output').value.length;
-            });
-        </script>
     </body>
 </html>
