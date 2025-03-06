@@ -28,10 +28,30 @@
         <meta name="twitter:image" content="./icon.png">
 
         <style>
-            .mobileSize * {
+            .noteEntry {
+                width: 95vw;
+                display: flex;
+                flex-direction: row;
+                padding: 1%;
                 height: 10vh;
-                min-width: 45vw;
                 font-size: 5vmin;
+                text-align: left;
+            }
+
+            .noteEntry * {
+                height: 10vh;
+                font-size: 5vmin;
+                text-align: left;
+            }
+
+            .noteEntry > label {
+                flex: 1;
+                text-wrap: nowrap;
+                padding-right: 2.5%;
+            }
+
+            .noteEntry > :nth-child(2) {
+                flex: 4;
             }
         </style>
 
@@ -42,76 +62,161 @@
         <i>If you are someone other than the creator of this app, <b>you shouldn't be using this!</b></i>
         <hr>
 
-        <form action="./writer.php" method="POST" class="mobileSize">
+        <form id="masterform" action="./writer.php" method="POST" style="width:100%">
 
-            <label for="type">Record Type:</label>
-            <select id="type" name="TYPE">
-                <option value="unset">Please select...</option>
-                <option value="note_other">Misc Note</option>
-                <option value="data_other">Misc Data</option>
-                <option value="data_bm">Necessary Evil</option>
-            </select>
+            <div id="entry_noteType" class="noteEntry">
+                <label for="type">Record Type:</label>
+                <select id="type" name="TYPE">
+                    <option value="UNSET">Please select...</option>
+                    <option value="note_other">Misc Note</option>
+                    <option value="data_other">Misc Data</option>
+                    <option value="data_bm">Necessary Evil</option>
+                    <option value="data_fun">Fun</option>
+                </select>
+            </div>
+            
+            <br>
+            <hr>
+            <br>
+
+            <!-- <QUANTITY> -->
+            <div id="entry_quantity" class="noteEntry">
+                <label for="quantity">Quantity:</label>
+                <select id="quantity" name="QUANTITY">
+                    <option value=-1>UNSET</option>
+                    <option value=1>Micro</option>
+                    <option value=2>Micro-Minor</option>
+                    <option value=3>Minor</option>
+                    <option value=4>Minor-Moderate</option>
+                    <option value=5>Moderate</option>
+                    <option value=6>Moderate-Major</option>
+                    <option value=7>Major</option>
+                </select>
+            </div>
+            <!-- </QUANTITY> -->
+
+            <!-- <SIZE> -->
+            <div id="entry_size" class="noteEntry">
+                <label for="size">Size:</label>
+                <select id="size" name="SIZE">
+                    <option value=-1>UNSET</option>
+                    <option value=1>Small</option>
+                    <option value=2>Medium</option>
+                    <option value=3>Large</option>
+                    <option value=4>Extra Large</option>
+                </select>
+            </div>
+            <!-- </SIZE> -->
+
+            <!-- <FORM> -->
+            <div id="entry_form" class="noteEntry">
+                <label for="form">Form-Factor:</label>
+                <select id="form" name="FORM">
+                    <option value="Normal">Normal</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Soft">Soft</option>
+                    <option value="Liquid">Liquid</option>
+                </select>
+            </div>
+            <!-- </FORM> -->
+
+            <!-- <COLOR> -->
+            <div id="entry_color" class="noteEntry">
+                <label for="color">Color:</label>
+                <input type="color" id="color" name="COLOR">
+            </div>
+            <!-- </COLOR> -->
+
+            <!-- <SCORE> -->
+            <div id="entry_score" class="noteEntry">
+                <label for="score">Score:</label>
+                <input type="number" id="score" name="SCORE" value=-1>
+            </div>
+            <!-- </SCORE> -->
+
+            <!-- <ARBETRARY PAYLOADS> -->
+            <div id="entry_tags" class="noteEntry">
+                <label for="tags">Type Tags:</label>
+                <input type="text" id="tags" name="TAGS">
+            </div>
+            <div id="entry_misc1" class="noteEntry">
+                <label for="misc1">Data 1:</label>
+                <textarea id="misc1" name="MISC1"></textarea>
+            </div>
+            <div id="entry_misc2" class="noteEntry">
+                <label for="misc2">Data 2:</label>
+                <textarea id="misc2" name="MISC2"></textarea>
+            </div>
+            <div id="entry_misc3" class="noteEntry">
+                <label for="misc3">Data 3:</label>
+                <textarea id="misc3" name="MISC3"></textarea>
+            </div>
+            <div id="entry_misc4" class="noteEntry">
+                <label for="misc4">Data 4:</label>
+                <textarea id="misc4" name="MISC4"></textarea>
+            </div>
+            <div id="entry_misc5" class="noteEntry">
+                <label for="misc5">Data 5:</label>
+                <textarea id="misc5" name="MISC5"></textarea>
+            </div>
+            <!-- </ARBETRARY PAYLOADS> -->
+
+
+
+            <!-- <DATETIME SELECTION> -->
+            <div id="entry_selectTime" class="noteEntry">
+                <label for="selectTime">Select Timestamp:</label>
+                <input type="datetime-local" id="selectTime" name="SELECTED_TIME">
+            </div>
+            <!-- </DATETIME SELECTION> -->
+
+            <!-- <CURRENT LOCATION> -->
+            <div id="entry_latitude" class="noteEntry">
+                <label for="position_latitude">Current Latitude:</label>
+                <input type="text" id="position_latitude" name="POSITION_LATITUDE" readonly>
+            </div>
+            <div id="entry_longitude" class="noteEntry">
+                <label for="position_longitude">Current Longitude:</label>
+                <input type="text" id="position_longitude" name="POSITION_LONGITUDE" readonly>
+            </div>
+            <!-- </CURRENT LOCATION> -->
+
+
+
+            <!-- <IMPORANCE> -->
+            <div id="entry_importance" class="noteEntry">
+                <label for="importance">Priority / Importance:</label>
+                <select id="importance" name="IMPORTANCE">
+                    <option value="0">None</option>
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">High</option>
+                </select>
+            </div>
+            <!-- </IMPORANCE> -->
+
+            <!-- <DELETABLE> -->
+            <div id="entry_ephemeral" class="noteEntry">
+                <label for="ephemeral">Ephemeral:</label>
+                <select id="ephemeral" name="DELETABLE">
+                    <option value=false>This data should persist</option>
+                    <option value=true>This data is only useful short-term</option>
+                </select>
+            </div>
+            <!-- </DELETABLE> -->
+            
             <br><br>
 
-            <label for="tags">Type Tags:</label>
-            <input type="text" id="tags" name="TAGS">
-            <br>
-
-            <br>
-
-            <label for="payload1">Data 1:</label>
-            <textarea id="payload1" name="PAYLOAD1"></textarea>
-            <br>
-            <label for="payload2">Data 2:</label>
-            <textarea id="payload2" name="PAYLOAD2"></textarea>
-            <br>
-            <label for="payload3">Data 3:</label>
-            <textarea id="payload3" name="PAYLOAD3"></textarea>
-            <br>
-            <label for="payload4">Data 4:</label>
-            <textarea id="payload4" name="PAYLOAD4"></textarea>
-            <br>
-            <label for="payload5">Data 5:</label>
-            <textarea id="payload5" name="PAYLOAD5"></textarea>
-            <br>
-    
-            <br>
-
-            <label for="strength">Priority / Importance:</label>
-            <select id="strength" name="IMPORTANCE">
-                <option value="-1">Please select...</option>
-                <option value="0">None</option>
-                <option value="1">Low</option>
-                <option value="2">Medium</option>
-                <option value="3">High</option>
-            </select>
-            <br><br>
-
-            <label for="ephemeral">Ephemeral:</label>
-            <select id="ephemeral" name="DELETABLE">
-                <option value=false>This data should persist</option>
-                <option value=true>This data is only useful short-term</option>
-            </select>
-            <br><br>
-
-            <label for="time">Current Timestamp:</label>
-            <input type="datetime-local" id="time" name="SELECTED_TIME">
-            <br><br>
-
-            <label for="position_latitude">Current Latitude:</label>
-            <input type="text" id="position_latitude" name="POSITION_LATITUDE" readonly>
-            <br><br>
-            <label for="position_longitude">Current Longitude:</label>
-            <input type="text" id="position_longitude" name="POSITION_LONGITUDE" readonly>
-            <br><br>
             
 
-            <button type="submit">Submit</button>
+            
+
+            <button type="submit" class="noteEntry">Submit</button>
         </form>
             
 
-
-        <script>
+        <!-- Data Synthesis -->
+        <script> 
             function getLocation() {
                 if ("geolocation" in navigator) {
                     navigator.geolocation.getCurrentPosition(
@@ -136,9 +241,52 @@
                 var ts = ts.toISOString();
                 console.log(ts);
                 ts = ts.substring(0, ts.length - 8);
-                document.getElementById("time").value = ts;
+                document.getElementById("selectTime").value = ts;
             }
             getTimestamp();
+        </script>
+
+        <!-- DOM Control -->
+        <script>
+            window.entryTypeDict = {
+                "note_other": "entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
+                "data_other": "entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
+                "data_bm": "entry_noteType,entry_quantity,entry_size,entry_form,entry_color,entry_selectTime,entry_misc1",
+                "data_fun": "entry_noteType,entry_score,entry_misc1,entry_selectTime"
+            }
+
+            window.controlForm = function()
+            {
+                var newType = document.getElementById("type").value;
+                var desiredElements = window.entryTypeDict[newType];
+                desiredElements += ",entry_noteType";
+                desiredElements = desiredElements.split(",");
+
+                var entryDivs = document.querySelectorAll('#masterform div');
+                for( var entryDiv of entryDivs )
+                {
+                    document.getElementById(entryDiv.id).style.display = "none";
+                }
+
+                for( var element of desiredElements )
+                {
+                    try 
+                    {
+                        document.getElementById(element).style.display = "flex";
+                    }
+                    catch
+                    {
+                        console.error("error enabling element ", element);
+                    }
+                }
+            }
+
+            document.getElementById("entry_noteType").addEventListener("change", function(event)
+            {
+                window.controlForm();
+            });
+
+            window.controlForm(); //fire it once
         </script>
     </body>
 </html>
