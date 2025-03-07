@@ -9,7 +9,7 @@
 ## Installation / Usage
  - Can be run in any httpx environment with JavaScript execution and PHP.
  - This codebase assumes the server is running though a cloudflared reverse proxy. If this is not the case, the `HTTP_CF_CONNECTING_IP` in `writer.php` will need adjustment.
- - My copy of this application is located at https://tools.snailien.net/Sticky/. ***ANYTHING YOU PUT HERE WILL BE DELETED!***
+ - My copy of this application is located at https://note.snailien.net. ***ANYTHING YOU PUT HERE WILL BE DELETED!***
 
 ## Security Concerns
  For this tool to be useful, it must be accessible on the global web. Thus, anyone could write data to it, which poses a security risk. The following steps have been taken to alleviate this issue:
