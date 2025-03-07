@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     // convert to json and append
     $out = json_encode($_POST) . "\n";
-    file_put_contents("./record.csv", $out, FILE_APPEND);
+    file_put_contents("./record.json", $out, FILE_APPEND);
 
 
     echo "Wrote " . $check . " characters following to the record:<br>" . "<pre>" . $out . "</pre>";

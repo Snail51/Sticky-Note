@@ -15,7 +15,7 @@
  For this tool to be useful, it must be accessible on the global web. Thus, anyone could write data to it, which poses a security risk. The following steps have been taken to alleviate this issue:
  - Prevent any single request from writing more than 8KB of data to the server.
  - Write down the IP address of the client making the request. If the IP is not one I recognize as myself, those entries can be easily deleted.
- - This program writes its values to `record.csv` with linux write-only permissions (`-rwx-w----`), and the PHP operation to write the content is of directive `FILE_APPEND`. These options make reading what has been written impossible. Reading MUST be done manually by the admin.
+ - This program writes its values to `record.json` with linux write-only permissions (`-rwx-w----`), and the PHP operation to write the content is of directive `FILE_APPEND`. These options make reading what has been written impossible. Reading MUST be done manually by the admin.
 
 ## (Potential) Future Plans
  - Limit requests from the same IP address to wait at least 60 seconds between subsequent entries
