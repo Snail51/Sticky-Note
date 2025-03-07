@@ -266,6 +266,11 @@
                 for( var entryDiv of entryDivs )
                 {
                     document.getElementById(entryDiv.id).style.display = "none";
+                    var inputs = document.getElementById(entryDiv.id).querySelectorAll('input,select,textarea');
+                    for ( var input of inputs )
+                    {
+                        input.disabled = true;
+                    }
                 }
 
                 for( var element of desiredElements )
@@ -273,6 +278,11 @@
                     try 
                     {
                         document.getElementById(element).style.display = "flex";
+                        var inputs = document.getElementById(element).querySelectorAll('input,select,textarea');
+                        for ( var input of inputs )
+                        {
+                            input.disabled = false;
+                        }
                     }
                     catch
                     {
