@@ -249,7 +249,7 @@
 
             window.getIdempotency = async function()
             {
-                var sourceData = window.navigator.userAgent + " " + Date.now() + " " + Math.round(Math.random() * 8192);
+                var sourceData = `${window.navigator.userAgent} _ ${Date.now()} _ ${Math.round(Math.random() * 8192)}`;
                 
                 const encoder = new TextEncoder();
                 sourceData = encoder.encode(sourceData);
