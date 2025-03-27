@@ -64,6 +64,8 @@
 
         <form id="masterform" action="./writer.php" method="POST" style="width:100%">
 
+            <input id="idempotency" name="idempotency" type="hidden" readonly>
+
             <div id="entry_noteType" class="noteEntry">
                 <label for="type">Record Type:</label>
                 <select id="type" name="TYPE">
@@ -244,15 +246,29 @@
                 document.getElementById("selectTime").value = ts;
             }
             getTimestamp();
+
+            window.getIdempotency = async function()
+            {
+                var sourceData = window.navigator.userAgent + " " + Date.now() + " " + Math.round(Math.random() * 8192);
+                
+                const encoder = new TextEncoder();
+                sourceData = encoder.encode(sourceData);
+                const hashBuffer = await window.crypto.subtle.digest('SHA-256', sourceData);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                document.getElementById("idempotency").value = hashHex;
+            }
+            getIdempotency();
         </script>
 
         <!-- DOM Control -->
         <script>
             window.entryTypeDict = {
-                "note_other": "entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
-                "data_other": "entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
-                "data_bm": "entry_noteType,entry_quantity,entry_size,entry_form,entry_color,entry_selectTime,entry_misc1",
-                "data_fun": "entry_noteType,entry_score,entry_misc1,entry_selectTime"
+                "note_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
+                "data_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
+                "data_bm": "idempotency,entry_noteType,entry_quantity,entry_size,entry_form,entry_color,entry_selectTime,entry_misc1",
+                "data_fun": "idempotency,entry_noteType,entry_score,entry_misc1,entry_selectTime"
             }
 
             window.controlForm = function()
