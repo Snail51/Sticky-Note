@@ -74,6 +74,7 @@
                     <option value="data_other">Misc Data</option>
                     <option value="data_bm">Necessary Evil</option>
                     <option value="data_fun">Fun</option>
+                    <option value="data_library">Library</option>
                 </select>
             </div>
             
@@ -183,6 +184,12 @@
             </div>
             <!-- </CURRENT LOCATION> -->
 
+            <!-- <USERS> -->
+            <div id="entry_users" class="noteEntry">
+                <label for="users">Users:</label>
+                <textarea id="users" name="USERS"></textarea>
+            </div>
+            <!-- </USERS> -->
 
 
             <!-- <IMPORANCE> -->
@@ -265,10 +272,11 @@
         <!-- DOM Control -->
         <script>
             window.entryTypeDict = {
-                "note_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
-                "data_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude",
+                "note_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude,entry_users",
+                "data_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude,entry_users",
                 "data_bm": "idempotency,entry_noteType,entry_quantity,entry_size,entry_form,entry_color,entry_selectTime,entry_misc1",
-                "data_fun": "idempotency,entry_noteType,entry_score,entry_misc1,entry_selectTime"
+                "data_fun": "idempotency,entry_noteType,entry_score,entry_misc1,entry_selectTime",
+                "data_library": "idempotency,entry_noteType,entry_users,entry_misc1,entry_misc2,entry_importance,entry_selectTime"
             }
 
             window.controlForm = function()
