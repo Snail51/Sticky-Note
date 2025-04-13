@@ -173,6 +173,13 @@
             </div>
             <!-- </DATETIME SELECTION> -->
 
+            <!-- <DURATION SELECTION> -->
+                <div id="entry_selectDuration" class="noteEntry">
+                    <label for="selectDuration">Select Timestamp:</label>
+                    <input type="time" id="selectDuration" name="SELECTED_DURATION" step="1" value="00:00:00">
+                </div>
+            <!-- </DURATION SELECTION> -->
+
             <!-- <CURRENT LOCATION> -->
             <div id="entry_latitude" class="noteEntry">
                 <label for="position_latitude">Current Latitude:</label>
@@ -241,7 +248,8 @@
                     );
                 }
             }
-            getLocation();
+            window.addEventListener("pageshow", () => getLocation());
+            
 
             function getTimestamp() // get the current DateTime (in local timezone) and write it to the time <input>
             {
@@ -252,7 +260,7 @@
                 ts = ts.substring(0, ts.length - 8);
                 document.getElementById("selectTime").value = ts;
             }
-            getTimestamp();
+            window.addEventListener("pageshow", () => getTimestamp());
 
             window.getIdempotency = async function()
             {
@@ -266,17 +274,17 @@
                 
                 document.getElementById("idempotency").value = hashHex;
             }
-            getIdempotency();
+            window.addEventListener("pageshow", () => getIdempotency());
         </script>
 
         <!-- DOM Control -->
         <script>
             window.entryTypeDict = {
-                "note_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude,entry_users",
-                "data_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_latitude,entry_longitude,entry_users",
+                "note_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_selectDuration,entry_latitude,entry_longitude,entry_users",
+                "data_other": "idempotency,entry_noteType,entry_tags,entry_misc1,entry_misc2,entry_misc3,entry_misc4,entry_misc5,entry_importance,entry_ephemeral,entry_selectTime,entry_selectDuration,entry_latitude,entry_longitude,entry_users",
                 "data_bm": "idempotency,entry_noteType,entry_quantity,entry_size,entry_form,entry_color,entry_selectTime,entry_misc1",
                 "data_fun": "idempotency,entry_noteType,entry_score,entry_misc1,entry_selectTime",
-                "data_library": "idempotency,entry_noteType,entry_users,entry_misc1,entry_misc2,entry_importance,entry_selectTime"
+                "data_library": "idempotency,entry_noteType,entry_users,entry_misc1,entry_misc2,entry_importance,entry_selectTime,entry_selectDuration"
             }
 
             window.controlForm = function()
