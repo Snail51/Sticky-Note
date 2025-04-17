@@ -64,8 +64,6 @@
 
         <form id="masterform" action="./writer.php" method="POST" style="width:100%">
 
-            <input id="idempotency" name="idempotency" type="hidden" readonly>
-
             <div id="entry_noteType" class="noteEntry">
                 <label for="type">Record Type:</label>
                 <select id="type" name="TYPE">
@@ -220,12 +218,10 @@
                 </select>
             </div>
             <!-- </DELETABLE> -->
+
+            <input id="idempotency" name="idempotency" type="hidden" readonly>
             
             <br><br>
-
-            
-
-            
 
             <button type="submit" class="noteEntry">Submit</button>
         </form>
