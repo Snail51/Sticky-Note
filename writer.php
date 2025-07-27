@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     foreach (array_keys($_POST) as $key)
     {
         $_POST[$key] = htmlspecialchars($_POST[$key]);
+        $_POST[$key] = str_replace(',', '&comma;', $_POST[$key]); // escape comma for CSV parsing
+        $_POST[$key] = str_replace('&#039;', '&apos;', $_POST[$key]); // prefer HTML escape for apostrophe
     }
 
     // convert to json and append
